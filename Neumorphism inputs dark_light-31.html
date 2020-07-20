@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Neumorphism inputs dark/light</title>
+<style>
+body {
+  --base1: #EBEFF3;
+  --base2: #C3D0DB;
+  --base3: #88A1B7;
+  --baseDark1: #396387;
+  --baseDark2: #204566;
+  --baseDark3: #152E44;
+  --base: #090E10;
+  --primary1: #FFA68B;
+  --primary2: #FF7145;
+  --primary3: #FF3D00;
+  --primaryDark1: #BA2D00;
+  --primaryDark2: #741C00;
+  --primaryDark3: #5C2511;
+  --primary: #2F0C00;
+}
+
+[data-theme="dark"] {
+  --base1: #2F4858;
+  --base2: #233541;
+  --base3: #162128;
+  --baseDark1: #ECEEEF;
+  --baseDark2: #B3BCC2;
+  --baseDark3: #7A8A94;
+}
+
+body {
+  --base-shadow: inset 0px 0px 0px var(--base3),
+  inset 0px 0px 0px var(--base1),
+  4px 4px 9px var(--base3),
+  -4px -4px 9px var(--base1);
+  --base-shadow-active: inset 4px 4px 9px var(--base3),
+  inset -4px -4px 6px var(--base1),
+  2px 2px 9px var(--base3),
+  -2px -2px 9px var(--base1);
+  --base-shadow-neutral: inset 0px 0px 0px var(--base3),
+  inset 0px 0px 0px var(--base1),
+  4px 4px 16px var(--base2),
+  -4px -4px 16px var(--base2);
+  --base-shadow-neutral-active: inset 2px 2px 6px var(--base3),
+  inset -2px -2px 6px var(--base1),
+  2px 2px 6px var(--base3),
+  -2px -2px 6px var(--base1);
+  --primary-shadow: inset 0px 0px 0px var(--primary3),
+  inset 0px 0px 0px var(--primary1),
+  4px 4px 9px var(--primary3),
+  -4px -4px 9px var(--primary1);
+  --primary-shadow-active: inset 4px 4px 9px var(--primaryDark1),
+  inset -4px -4px 6px var(--primary2),
+  2px 2px 9px var(--primaryDark1),
+  -2px -2px 9px var(--primary1);
+  --primary-shadow-neutral: inset 0px 0px 0px var(--primary3),
+  inset 0px 0px 0px var(--primary1),
+  4px 4px 16px var(--primary2),
+  -4px -4px 16px var(--primary2);
+  --primary-shadow-neutral-active: inset 2px 2px 6px var(--primary3),
+  inset -2px -2px 6px var(--primary1),
+  2px 2px 6px var(--primary3),
+  -2px -2px 6px var(--primary1);
+  --shadow-transition: all 0.25s cubic-bezier(.17, .67, .83, .67);
+  --text-shadow:
+    -0.6px -0.6px 0px var(--baseDark1),
+    0.6px -0.6px 0px var(--baseDark1),
+    0.6px 0.6px 0px var(--baseDark1),
+    -0.6px 0.6px 0px var(--baseDark1)
+  ;
+  --input-shadow:
+    2px 2px 9px var(--base3),
+    -2px -2px 9px var(--base1)
+  ;
+  --input-shadow-active:
+    inset 2px 2px 6px var(--base3),
+    inset -2px -2px 6px var(--base1),
+    1px 1px 6px var(--base3),
+    -1px -1px 6px var(--base1)
+  ;
+  --input-shadow-valid:
+    inset 2px 2px 4px var(--base3),
+    inset -2px -2px 4px var(--base1),
+    1px 1px 6px var(--base3),
+    -1px -1px 6px var(--base1)
+  ;
+  --input-radio-inner-valid:
+    inset 2px 2px 4px var(--base3),
+    inset -2px -2px 4px var(--base1),
+    1px 1px 4px var(--base3),
+    -1px -1px 4px var(--base1)
+  ;
+}
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  --main-font: Helvetica, Arial, sans-serif;
+}
+
+p {
+  font-size: 18px;
+  line-height: 28px;
+}
+
+h3 {
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: bold;
+}
+
+button {
+  border-radius: 10px;
+  padding: 10px 15px;
+  max-width: 500px;
+  font-size: 12px;
+  line-height: 22px;
+  font-weight: 900;
+  text-transform: uppercase;
+  -webkit-transition: var(--shadow-transition);
+  transition: var(--shadow-transition);
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  color: var(--baseDark2);
+  background: var(--base2);
+  border: 2px solid var(--base2);
+  box-shadow: var(--base-shadow);
+}
+button:hover, button:active, button:focus, button.active {
+  outline: none;
+  box-shadow: var(--base-shadow-active);
+  color: var(--baseDark2);
+  border-color: var(--base3);
+}
+button:disabled {
+  color: var(--base3);
+  background: var(--base2);
+  border-color: var(--base3);
+  box-shadow: 4px 4px 16px var(--base2), -4px -4px 16px var(--base2);
+  -webkit-transition: unset;
+  transition: unset;
+}
+button:disabled span {
+  -webkit-transition: unset;
+  transition: unset;
+  -webkit-transform: unset;
+          transform: unset;
+}
+button:disabled:hover, button:disabled:active, button:disabled:focus {
+  color: var(--base3);
+  background: var(--base2);
+  border-color: var(--base3);
+  box-shadow: unset;
+}
+
+.tertiary {
+  box-shadow: var(--base-shadow-neutral);
+}
+.tertiary:hover, .tertiary:active, .tertiary:focus {
+  box-shadow: var(--base-shadow-neutral-active);
+}
+
+.primary {
+  color: var(--primaryDark3);
+  background: var(--primary3);
+  border-color: var(--primary3);
+  box-shadow: var(--primary-shadow);
+}
+.primary:hover, .primary:active, .primary:focus, .primary.active {
+  color: var(--primaryDark3);
+  background: var(--primary3);
+  box-shadow: var(--primary-shadow-active);
+  border-color: var(--primaryDark1);
+}
+@media (prefers-color-scheme: dark) {
+  .primary:hover, .primary:active, .primary:focus, .primary.active {
+    color: var(--primaryDark2);
+    background: var(--primaryDark3);
+    box-shadow: var(--primary-shadow-active);
+    border-color: var(--primary1);
+  }
+}
+.primary:disabled {
+  color: var(--primaryDark3);
+  background: var(--primaryDark1);
+  border-color: var(--primaryDark2);
+  box-shadow: unset;
+}
+.primary:disabled span {
+  -webkit-transition: unset;
+  transition: unset;
+  -webkit-transform: unset;
+          transform: unset;
+}
+.primary:disabled:hover, .primary:disabled:active, .primary:disabled:focus {
+  color: var(--primaryDark3);
+  background: var(--primaryDark1);
+  border-color: var(--primaryDark3);
+  box-shadow: unset;
+}
+
+input {
+  border: none;
+  box-sizing: border-box;
+}
+
+.text-input-group {
+  position: relative;
+}
+.text-input-group label, .text-input-group input {
+  font-size: 14px;
+  line-height: 20px;
+  font-family: var(--main-font);
+  color: var(--baseDark1);
+}
+.text-input-group label {
+  position: absolute;
+  left: 18px;
+  top: 17px;
+  -webkit-transform-origin: left top;
+          transform-origin: left top;
+  -webkit-transition: all 0.25s linear;
+  transition: all 0.25s linear;
+}
+.text-input-group input {
+  width: 100%;
+  border-radius: 10px;
+  min-height: 30px;
+  padding: 10px 15px;
+  margin-top: 5px;
+  background: var(--base2);
+  border: 2px solid var(--base2);
+  box-shadow: var(--input-shadow);
+  -webkit-transition: var(--shadow-transition);
+  transition: var(--shadow-transition);
+  color: var(--base3);
+}
+.text-input-group input::-webkit-input-placeholder {
+  color: var(--base2);
+  -webkit-transition: color 0.25s linear;
+  transition: color 0.25s linear;
+  text-shadow: none;
+}
+.text-input-group input::-moz-placeholder {
+  color: var(--base2);
+  -moz-transition: color 0.25s linear;
+  transition: color 0.25s linear;
+  text-shadow: none;
+}
+.text-input-group input:-ms-input-placeholder {
+  color: var(--base2);
+  -ms-transition: color 0.25s linear;
+  transition: color 0.25s linear;
+  text-shadow: none;
+}
+.text-input-group input::-ms-input-placeholder {
+  color: var(--base2);
+  -ms-transition: color 0.25s linear;
+  transition: color 0.25s linear;
+  text-shadow: none;
+}
+.text-input-group input::placeholder {
+  color: var(--base2);
+  -webkit-transition: color 0.25s linear;
+  transition: color 0.25s linear;
+  text-shadow: none;
+}
+.text-input-group input:focus:enabled, .text-input-group input:active:enabled {
+  outline: none;
+  color: var(--baseDark2);
+  border-color: var(--base3);
+  box-shadow: var(--input-shadow-active);
+}
+@media (prefers-color-scheme: dark) {
+  .text-input-group input:focus:enabled, .text-input-group input:active:enabled {
+    border-color: var(--baseDark1);
+  }
+}
+.text-input-group input:focus:enabled::-webkit-input-placeholder, .text-input-group input:active:enabled::-webkit-input-placeholder {
+  color: var(--base3);
+}
+.text-input-group input:focus:enabled::-moz-placeholder, .text-input-group input:active:enabled::-moz-placeholder {
+  color: var(--base3);
+}
+.text-input-group input:focus:enabled:-ms-input-placeholder, .text-input-group input:active:enabled:-ms-input-placeholder {
+  color: var(--base3);
+}
+.text-input-group input:focus:enabled::-ms-input-placeholder, .text-input-group input:active:enabled::-ms-input-placeholder {
+  color: var(--base3);
+}
+.text-input-group input:focus:enabled::placeholder, .text-input-group input:active:enabled::placeholder {
+  color: var(--base3);
+}
+@media (prefers-color-scheme: dark) {
+  .text-input-group input:focus:enabled::-webkit-input-placeholder, .text-input-group input:active:enabled::-webkit-input-placeholder {
+    color: var(--baseDark2);
+  }
+  .text-input-group input:focus:enabled::-moz-placeholder, .text-input-group input:active:enabled::-moz-placeholder {
+    color: var(--baseDark2);
+  }
+  .text-input-group input:focus:enabled:-ms-input-placeholder, .text-input-group input:active:enabled:-ms-input-placeholder {
+    color: var(--baseDark2);
+  }
+  .text-input-group input:focus:enabled::-ms-input-placeholder, .text-input-group input:active:enabled::-ms-input-placeholder {
+    color: var(--baseDark2);
+  }
+  .text-input-group input:focus:enabled::placeholder, .text-input-group input:active:enabled::placeholder {
+    color: var(--baseDark2);
+  }
+}
+.text-input-group input:focus:enabled + label, .text-input-group input:active:enabled + label {
+  -webkit-transform: translateY(-34px) scale(0.9);
+          transform: translateY(-34px) scale(0.9);
+  font-weight: 600;
+}
+.text-input-group input:valid {
+  box-shadow: var(--input-shadow-valid);
+  color: var(--baseDark1);
+}
+.text-input-group input:valid + label {
+  -webkit-transform: translateY(-34px) scale(0.9);
+          transform: translateY(-34px) scale(0.9);
+  font-weight: 600;
+}
+.text-input-group input:disabled {
+  color: var(--base3);
+  background: var(--base2);
+  border-color: var(--base3);
+  box-shadow: var(--input-shadow-neutral);
+  -webkit-transition: unset;
+  transition: unset;
+}
+.text-input-group input:disabled + label {
+  color: var(--base3);
+}
+
+.radios {
+  display: grid;
+  padding: 10px;
+}
+
+.radio-wrapper {
+  margin: 0.5rem 0;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  opacity: 0;
+}
+input[type="radio"] + label,
+input[type="checkbox"] + label {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+input[type="radio"] + label span,
+input[type="checkbox"] + label span {
+  margin-left: 6px;
+}
+input[type="radio"] + label::before,
+input[type="checkbox"] + label::before {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: -2px;
+  left: -24px;
+  border-radius: 50%;
+  border: 2px solid var(--base2);
+  box-shadow: var(--input-shadow);
+  box-shadow: var(--input-shadow-valid);
+  width: 18px;
+  height: 18px;
+}
+input[type="radio"] + label::after,
+input[type="checkbox"] + label::after {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  left: -19px;
+  top: 3px;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  -webkit-transform-origin: center center;
+          transform-origin: center center;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: var(--shadow-transition);
+  transition: var(--shadow-transition);
+}
+input[type="radio"]:checked + label::before,
+input[type="checkbox"]:checked + label::before {
+  box-shadow: var(--input-radio-inner-valid);
+}
+input[type="radio"]:checked + label::after,
+input[type="checkbox"]:checked + label::after {
+  background: var(--baseDark1);
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+input[type="radio"]:focus + label span, input[type="radio"]:active + label span,
+input[type="checkbox"]:focus + label span,
+input[type="checkbox"]:active + label span {
+  font-weight: 600;
+}
+input[type="radio"]:focus + label::before, input[type="radio"]:active + label::before,
+input[type="checkbox"]:focus + label::before,
+input[type="checkbox"]:active + label::before {
+  box-shadow: var(--input-shadow-active);
+  border-color: var(--base3);
+}
+@media (prefers-color-scheme: dark) {
+  input[type="radio"]:focus + label::before, input[type="radio"]:active + label::before,
+  input[type="checkbox"]:focus + label::before,
+  input[type="checkbox"]:active + label::before {
+    border-color: var(--baseDark2);
+  }
+}
+
+input[type="checkbox"] + label::before {
+  border-radius: 6px;
+  box-shadow: var(--input-radio-inner-valid);
+}
+input[type="checkbox"] + label::after {
+  content: "\2713";
+}
+input[type="checkbox"]:checked + label::after {
+  top: 0;
+  background-color: transparent;
+}
+
+.card {
+  border-radius: 10px;
+  display: grid;
+  grid-gap: 10px;
+  max-width: 500px;
+  padding: 15px 20px;
+  background: var(--base2);
+  border: 2px solid var(--base3);
+}
+.card__content {
+  max-width: 600px;
+  display: grid;
+  grid-gap: 20px;
+}
+.card__footer {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: auto auto;
+  -webkit-box-pack: start;
+          justify-content: flex-start;
+}
+
+form {
+  margin: 20px 0;
+  display: grid;
+  grid-gap: 20px;
+}
+form .input-fields {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 1fr 1fr;
+}
+@media screen and (max-width: 500px) {
+  form .input-fields {
+    grid-template-columns: 1fr;
+    grid-gap: 30px 20px;
+  }
+}
+
+.checkbox-set .radios {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+@media screen and (max-width: 500px) {
+  .checkbox-set .radios {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media screen and (max-width: 414px) {
+  .checkbox-set .radios {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (max-width: 360px) {
+  .checkbox-set .radios {
+    grid-template-columns: 1fr;
+  }
+}
+
+.container {
+  min-height: 100%;
+  padding: 50px 25px;
+}
+
+body {
+  background: var(--base2);
+  color: var(--baseDark2);
+}
+
+.theme {
+  justify-self: end;
+  padding: 50px 20px 50px 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 20px;
+  -webkit-box-align: center;
+          align-items: center;
+}
+.theme button {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+}
+.theme svg path:nth-child(2) {
+  fill: var(--baseDark2);
+}
+.theme svg path:nth-child(3) {
+  fill: var(--baseDark2);
+}
+
+</style>
+
+</head>
+<body>
+<div class="container">
+  <div class="theme">
+    <button class="button toggle" id="theme" >
+      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+          <path d="M0 0h24v24H0V0z" fill="none" />
+          <path
+                d="M18 9.52V6h-3.52L12 3.52 9.52 6H6v3.52L3.52 12 6 14.48V18h3.52L12 20.48 14.48 18H18v-3.52L20.48 12 18 9.52zm-6 7.98c-3.03 0-5.5-2.47-5.5-5.5S8.97 6.5 12 6.5s5.5 2.47 5.5 5.5-2.47 5.5-5.5 5.5z"
+                opacity=".3" />
+          <path
+                d="M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69zm-2 5.79V18h-3.52L12 20.48 9.52 18H6v-3.52L3.52 12 6 9.52V6h3.52L12 3.52 14.48 6H18v3.52L20.48 12 18 14.48zM12 6.5c-3.03 0-5.5 2.47-5.5 5.5s2.47 5.5 5.5 5.5 5.5-2.47 5.5-5.5-2.47-5.5-5.5-5.5zm0 9c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z" />
+        </svg>
+    </button>
+    Theme Toggle
+  </div>
+  
+  <div class="card">
+
+    <div class="card__content">
+      <h3 class="card__title">Neumorphism Form Fields</h3>
+      <form>
+
+        <div class="input-fields">
+          <div class="text-input-group">
+            <input 
+              type="text" 
+              name="firstName" 
+              id="firstName" 
+              placeholder="John" 
+              autocomplete="off"
+              required="required"
+            >
+            <label for="firstName">First Name</label>
+          </div>
+
+          <div class="text-input-group">
+            <input 
+              type="text" 
+              name="lastName" 
+              id="lastName" 
+              placeholder="Doe" 
+              autocomplete="off"
+              required="required"
+            >
+            <label for="lastName">Last Name</label>
+          </div>
+
+
+          <div class="text-input-group">
+            <input 
+              type="text" 
+              name="disabled" 
+              id="disabled" 
+              placeholder="Doe" 
+              autocomplete="off"
+              required="required"
+              disabled
+            >
+            <label for="disabled"> Disabled Field</label>
+          </div>
+
+        </div>
+
+        <div class="radio-set">
+          <legend>What is your favorite Color?</legend>
+          <div class="radios">
+
+            <div class="radio-wrapper">
+              <input type="radio" name="favColor" id="red">
+              <label for="red"><span>Red</span></label>
+            </div>
+            <div class="radio-wrapper">
+              <input type="radio" name="favColor" id="green ">
+              <label for="green "><span>Green </span></label>
+            </div>
+            <div class="radio-wrapper">
+              <input type="radio" name="favColor" id="blue">
+              <label for="blue"><span>Blue</span></label>
+            </div>
+
+          </div>
+        </div>
+
+
+
+        <div class="checkbox-set">
+          <legend>What are your favorite Pizza toppings?</legend>
+          <div class="radios radios-checkbox">
+
+            <div class="radio-wrapper">
+              <input type="checkbox" name="favToppings" id="cheese">
+              <label for="cheese"><span>Cheese</span></label>
+            </div>
+            <div class="radio-wrapper">
+              <input type="checkbox" name="favToppings" id="pepperoni">
+              <label for="pepperoni"><span>Pepperoni</span></label>
+            </div>
+            <div class="radio-wrapper">
+              <input type="checkbox" name="favToppings" id="pineapple">
+              <label for="pineapple"><span>Pineapple</span></label>
+            </div>
+            <div class="radio-wrapper">
+              <input type="checkbox" name="favToppings" id="sausage">
+              <label for="sausage"><span>Sausage</span></label>
+            </div>
+            <div class="radio-wrapper">
+              <input type="checkbox" name="favToppings" id="moreCheese">
+              <label for="moreCheese"><span>More cheese</span></label>
+            </div>
+
+          </div>
+        </div>
+
+
+      </form>
+
+    </div>
+
+    <div class="card__footer">
+      <button><span>Submit Form</span></button>
+      <button class="tertiary"><span>Cancel</span></button>
+    </div>
+  </div>
+</div>
+
+<script>
+let darkTheme = false;
+
+document.getElementById("theme").addEventListener("click", function(){
+    console.log('clicked!');
+    darkTheme = !darkTheme;
+    darkTheme ? document.body.setAttribute('data-theme', 'dark') : document.body.removeAttribute('data-theme');
+  
+  // document.getElementById("demo").innerHTML = "Hello World";
+});
+
+
+
+</script>    
+</body>
+</html>
